@@ -1,11 +1,11 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View, Text, Image, Navigator } from '@tarojs/components';
-import './packetRain.less';
+import './scratchCard.less';
 
-export default class PacketRain extends Component {
+export default class ScratchCard extends Component {
   state = {};
   config = {
-    navigationBarTitleText: '红包雨'
+    navigationBarTitleText: '刮刮卡'
   };
 
   render() {

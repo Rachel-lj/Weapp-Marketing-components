@@ -1,6 +1,6 @@
 const path = require('path');
 const config = {
-  projectName: 'bigWheel',
+  projectName: 'Weapp Marketing Components',
   date: '2019-10-16',
   designWidth: 750,
   deviceRatio: {

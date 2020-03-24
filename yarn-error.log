@@ -18,7 +18,7 @@ Trace:
 
 npm manifest: 
   {
-    "name": "bigWheel",
+    "name": "Weapp Marketing Components",
     "version": "1.0.0",
     "private": true,
     "description": "",

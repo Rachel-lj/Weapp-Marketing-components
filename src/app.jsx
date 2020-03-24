@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro';
-import Index from './pages/bigWheel/bigWheel';
+import Index from './pages/index/index';
 
 import './app.less';
 
@@ -16,7 +16,10 @@ class App extends Component {
       'pages/bigWheel/bigWheel',
       'pages/gridCard/gridCard',
       'pages/packetRain/packetRain',
-      'pages/slotMachine/slotMachine'
+      'pages/slotMachine/slotMachine',
+      'pages/goldenEgg/goldenEgg',
+      'pages/scratchCard/scratchCard',
+      'pages/shake/shake'
     ],
     window: {
       backgroundTextStyle: 'light',

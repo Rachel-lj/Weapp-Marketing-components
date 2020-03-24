@@ -31,6 +31,24 @@ export default class Index extends Component {
             url: '/pages/slotMachine/slotMachine',
             name: '老虎机动画',
             show: true
+          },
+          {
+            id: 'golden-egg',
+            url: '/pages/goldenEgg/goldenEgg',
+            name: '砸金蛋',
+            show: true
+          },
+          {
+            id: 'scratch-card',
+            url: '/pages/scratchCard/scratchCard',
+            name: '刮刮卡',
+            show: true
+          },
+          {
+            id: 'shake',
+            url: '/pages/shake/shake',
+            name: '摇一摇',
+            show: true
           }
         ]
       }
