@@ -1,0 +1,115 @@
+.container {
+  min-height: 100vh;
+  background-color: #612ff2;
+}
+
+.btn-group {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+}
+.bgContainer {
+  display: flex;
+  flex-direction: column;
+  width: 750px;
+  height: 1150px;
+  .bgIcon {
+    width: 750px;
+    height: 1150px;
+    position: absolute;
+  }
+  .slot-machine-container {
+    margin-top: 80px;
+    z-index: 2;
+    width: 750px;
+    height: 1001px;
+    display: flex;
+    justify-content: center;
+    background: transparent
+      url(https://xinya-shop.oss-cn-hangzhou.aliyuncs.com/images/static/slotMachines@2x.png)
+      bottom center no-repeat;
+    background-size: cover;
+    .reel-container {
+      position: absolute;
+      left: 144px;
+      top: 382px;
+      width: 455px;
+      height: 232px;
+      overflow: hidden;
+      .reel {
+        position: absolute;
+        width: 120px;
+        height: 2340px;
+        background: transparent
+          url(https://xinya-shop.oss-cn-hangzhou.aliyuncs.com/images/static/prizeGroup.png)
+          0 0 repeat-y;
+        background-size: contain;
+      }
+      .reel0 {
+        left: 10px;
+      }
+      .reel1 {
+        left: 172px;
+      }
+      .reel2 {
+        left: 335px;
+      }
+    }
+    .drawNumView {
+      position: absolute;
+      width: 480px;
+      height: 70px;
+      top: 630px;
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      .txt1 {
+        display: block;
+        line-height: 70px;
+        font-size: 30px;
+        font-family: Source Han Sans CN;
+        font-weight: bold;
+        color: rgba(204, 82, 0, 1);
+      }
+      .txt2 {
+        display: block;
+        font-size: 30px;
+        line-height: 70px;
+        font-family: Source Han Sans CN;
+        font-weight: 500;
+        text-decoration: underline;
+        color: rgba(204, 82, 0, 1);
+      }
+    }
+    .btnIcon {
+      position: absolute;
+      width: 470px;
+      height: 135px;
+      top: 705px;
+    }
+  }
+}
+
+@keyframes bounce {
+  40%,
+  43% {
+    animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+    transform: translate3d(0, -40px, 0);
+  }
+  70% {
+    animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+    transform: translate3d(0, 20px, 0);
+  }
+  to {
+    animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+    transform: translate3d(0, 0, 0);
+  }
+}
+.bounce {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-name: bounce;
+  transform-origin: center bottom;
+}

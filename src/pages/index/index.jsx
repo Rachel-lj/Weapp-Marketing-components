@@ -28,7 +28,7 @@ export default class Index extends Component {
           },
           {
             id: 'slot-machine',
-            url: '/pages/slotMachine/slotMachine',
+            url: '/pages/slotMachine1/slotMachine',
             name: '老虎机动画',
             show: true
           },

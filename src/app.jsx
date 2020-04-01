@@ -16,7 +16,7 @@ class App extends Component {
       'pages/bigWheel/bigWheel',
       'pages/gridCard/gridCard',
       'pages/packetRain/packetRain',
-      'pages/slotMachine/slotMachine',
+      'pages/slotMachine1/slotMachine',
       'pages/goldenEgg/goldenEgg',
       'pages/scratchCard/scratchCard',
       'pages/shake/shake'
