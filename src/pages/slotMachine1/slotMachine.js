@@ -6,6 +6,23 @@ export default class SlotMachine extends Component {
   state = {
     spinDisabled: false,
     result: [], // 中奖池
+    prize: [
+      {
+        name: '一等奖',
+        content: 'iphone1',
+        id: 1
+      },
+      {
+        name: '二等奖',
+        content: 'iphone11',
+        id: 2
+      },
+      {
+        name: '三等奖',
+        content: 'iphone12',
+        id: 3
+      }
+    ],
     credits: 50, //积分
     curBet: 1, // 每局消耗积分
     stripHeight: 390, // 总高度
@@ -101,7 +118,7 @@ export default class SlotMachine extends Component {
     const { stripHeight, reelSpeed1Delta, reels, timer } = this.state; //  stripHeight总高度，reelSpeed1Delta间隔位移
     const position = parseInt(-(Math.random() * stripHeight * 2));
 
-    console.log('开始动画---position---', position);
+    // console.log('开始动画---position---', position);
 
     reels.map((item, reelsIndex) => {
       if (reelsIndex == index) {
@@ -121,8 +138,8 @@ export default class SlotMachine extends Component {
         }
         return item;
       });
-      console.log('开始动画--循环动画--reels---', reels);
-      console.log('开始动画--循环动画--timer---', timer);
+      // console.log('开始动画--循环动画--reels---', reels);
+      // console.log('开始动画--循环动画--timer---', timer);
       this.setState({
         reels: reels
       });
@@ -133,7 +150,7 @@ export default class SlotMachine extends Component {
           }
           return item;
         });
-        console.log('开始动画--如果top大于0--reels---', reels);
+        // console.log('开始动画--如果top大于0--reels---', reels);
         this.setState({
           reels: reels
         });
@@ -151,8 +168,8 @@ export default class SlotMachine extends Component {
       reels
     } = this.state;
     const cellHeight = stripHeight / numIconsPerReel;
-    console.log('--结束动画--cellHeight--', cellHeight);
-    console.log('--结束动画--lottery--', lottery);
+    // console.log('--结束动画--cellHeight--', cellHeight);
+    // console.log('--结束动画--lottery--', lottery);
     const position =
       -stripHeight - (lottery - 1) * cellHeight + alignmentOffset;
 
@@ -167,7 +184,7 @@ export default class SlotMachine extends Component {
       }
       return item;
     });
-    console.log('--结束动画--reels--', reels);
+    // console.log('--结束动画--reels--', reels);
     this.setState({
       reels: reels
     });
@@ -181,8 +198,8 @@ export default class SlotMachine extends Component {
     });
     animation.translateY(bounceHeight).step();
 
-    console.log('end---animation---', animation.export());
-    console.log('end---state---', this.state);
+    // console.log('end---animation---', animation.export());
+    // console.log('end---state---', this.state);
 
     reels.map((item, reelsIndex) => {
       if (reelsIndex == index) {
@@ -235,8 +252,11 @@ export default class SlotMachine extends Component {
     });
   }
   render() {
-    const { result, reels } = this.state;
-    console.log('render时候的reels', reels);
+    const { prize, reels } = this.state;
+    const rule =
+      '1.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n2.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n3.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n4.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n5.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n6.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n7.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。';
+    // console.log('render时候的reels', reels);
+    let Rule = rule.replace(/\\n/g, '\n');
     return (
       <View className="container">
         <View className="bgContainer">
@@ -244,6 +264,7 @@ export default class SlotMachine extends Component {
             src="https://xinya-shop.oss-cn-hangzhou.aliyuncs.com/images/static/slotBg@2x.png"
             className="bgIcon"
           ></Image>
+          {/* 水果机部分 */}
           <View className="slot-machine-container">
             <View className="reel-container">
               {reels.map((item, index) => {
@@ -261,13 +282,66 @@ export default class SlotMachine extends Component {
               <Text className="txt1">您共有X次摇奖机会</Text>
               <Text className="txt2">中奖历史</Text>
             </View>
+            {/* 点击抽奖按钮 */}
             <Image
               onClick={this.start}
               src="https://xinya-shop.oss-cn-hangzhou.aliyuncs.com/images/static/slotBtn@2x.png"
               className="btnIcon"
             ></Image>
+            {/* 注意事项 */}
+            <View className="attentionView">
+              <Text className="txt1">— 注意事项 —</Text>
+              <Text className="txt2">
+                *注：积分兑换可以获取更多抽奖机会，每个季度的最后一个月（3月，6月，9月，12月）的28号清空当季获取的抽奖机会
+              </Text>
+            </View>
           </View>
         </View>
+        {/* 奖品名单-标题 */}
+        <View className="prizeTitleView">
+          <Image
+            src="https://xinya-shop.oss-cn-hangzhou.aliyuncs.com/images/static/prizeBgLeft@2x.png"
+            className="prizeLeftIcon"
+          ></Image>
+          <View className="prizeTxtView">
+            <Image
+              src="https://xinya-shop.oss-cn-hangzhou.aliyuncs.com/images/static/prizeBg@2x.png"
+              className="prizeIcon"
+            ></Image>
+            <Text className="txt1">奖品名单</Text>
+          </View>
+        </View>
+        {/* 奖品名单-内容 */}
+        <View className="prizeView">
+          {prize.map((item, index) => {
+            return (
+              <View
+                className={index == 2 ? 'prizeItemView2' : 'prizeItemView'}
+                key={item.id}
+              >
+                <Text className="txt1">{item.name}</Text>
+                <Text className="txt1">{item.content}</Text>
+              </View>
+            );
+          })}
+        </View>
+        {/* 游戏规则-标题 */}
+        <View className="ruleTitleView">
+          <View className="ruleTxtView">
+            <Image
+              src="https://xinya-shop.oss-cn-hangzhou.aliyuncs.com/images/static/prizeBg@2x.png"
+              className="prizeIcon"
+            ></Image>
+            <Text className="txt1">游戏规则</Text>
+          </View>
+          <Image
+            src="https://xinya-shop.oss-cn-hangzhou.aliyuncs.com/images/static/prizeBgRight@2x.png"
+            className="prizeRightIcon"
+          ></Image>
+        </View>
+        {/* 游戏规则*/}
+        <View className="ruleView">{Rule}</View>
+        <View className="blockView"></View>
       </View>
     );
   }

@@ -1,94 +1,262 @@
 .container {
   min-height: 100vh;
   background-color: #612ff2;
-}
-
-.btn-group {
-  margin-top: 40px;
-  display: flex;
-  align-items: center;
-}
-.bgContainer {
-  display: flex;
-  flex-direction: column;
-  width: 750px;
-  height: 1150px;
-  .bgIcon {
+  .bgContainer {
+    display: flex;
+    flex-direction: column;
     width: 750px;
     height: 1150px;
-    position: absolute;
-  }
-  .slot-machine-container {
-    margin-top: 80px;
-    z-index: 2;
-    width: 750px;
-    height: 1001px;
-    display: flex;
-    justify-content: center;
-    background: transparent
-      url(https://xinya-shop.oss-cn-hangzhou.aliyuncs.com/images/static/slotMachines@2x.png)
-      bottom center no-repeat;
-    background-size: cover;
-    .reel-container {
+    .bgIcon {
+      width: 750px;
+      height: 1150px;
       position: absolute;
-      left: 144px;
-      top: 382px;
-      width: 455px;
-      height: 232px;
-      overflow: hidden;
-      .reel {
+    }
+    .slot-machine-container {
+      margin-top: 80px;
+      z-index: 2;
+      width: 750px;
+      height: 1001px;
+      display: flex;
+      justify-content: center;
+      background: transparent
+        url(https://xinya-shop.oss-cn-hangzhou.aliyuncs.com/images/static/slotMachines@2x.png)
+        bottom center no-repeat;
+      background-size: cover;
+      .reel-container {
         position: absolute;
-        width: 120px;
-        height: 2340px;
-        background: transparent
-          url(https://xinya-shop.oss-cn-hangzhou.aliyuncs.com/images/static/prizeGroup.png)
-          0 0 repeat-y;
-        background-size: contain;
+        left: 144px;
+        top: 382px;
+        width: 455px;
+        height: 232px;
+        overflow: hidden;
+        .reel {
+          position: absolute;
+          width: 120px;
+          height: 2340px;
+          background: transparent
+            url(https://xinya-shop.oss-cn-hangzhou.aliyuncs.com/images/static/prizeGroup.png)
+            0 0 repeat-y;
+          background-size: contain;
+        }
+        .reel0 {
+          left: 10px;
+        }
+        .reel1 {
+          left: 172px;
+        }
+        .reel2 {
+          left: 335px;
+        }
       }
-      .reel0 {
-        left: 10px;
+      .drawNumView {
+        position: absolute;
+        width: 480px;
+        height: 70px;
+        top: 630px;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        .txt1 {
+          display: block;
+          line-height: 70px;
+          font-size: 30px;
+          font-family: Source Han Sans CN;
+          font-weight: bold;
+          color: rgba(204, 82, 0, 1);
+        }
+        .txt2 {
+          display: block;
+          font-size: 30px;
+          line-height: 70px;
+          font-family: Source Han Sans CN;
+          font-weight: 500;
+          text-decoration: underline;
+          color: rgba(204, 82, 0, 1);
+        }
       }
-      .reel1 {
-        left: 172px;
+      .btnIcon {
+        position: absolute;
+        width: 470px;
+        height: 135px;
+        top: 705px;
       }
-      .reel2 {
-        left: 335px;
+      .attentionView {
+        position: absolute;
+        width: 470px;
+        height: 185px;
+        top: 875px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .txt1 {
+          display: block;
+          width: 470px;
+          height: 60px;
+          line-height: 60px;
+          font-size: 28px;
+          font-family: Source Han Sans CN;
+          font-weight: bold;
+          color: rgba(161, 61, 1, 1);
+          text-align: center;
+        }
+        .txt2 {
+          display: block;
+          width: 470px;
+          height: 120px;
+          font-size: 22px;
+          font-family: Source Han Sans CN;
+          font-weight: 500;
+          line-height: 35px;
+          color: rgba(161, 61, 1, 1);
+        }
       }
     }
-    .drawNumView {
-      position: absolute;
-      width: 480px;
-      height: 70px;
-      top: 630px;
+  }
+  .prizeTitleView {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    width: 750px;
+    height: 90px;
+
+    .prizeLeftIcon {
+      width: 29px;
+      height: 39px;
+      margin-right: 60px;
+      margin-left: 110px;
+      margin-bottom: 10px;
+    }
+    .prizeTxtView {
+      width: 355px;
+      height: 90px;
+      display: flex;
+      flex-direction: row;
+      .prizeIcon {
+        width: 355px;
+        height: 90px;
+      }
+      .txt1 {
+        display: block;
+        width: 355px;
+        height: 90px;
+        font-size: 40px;
+        font-family: Source Han Sans CN;
+        font-weight: 500;
+        color: rgba(161, 61, 1, 1);
+        line-height: 90px;
+        position: absolute;
+        text-align: center;
+        letter-spacing: 8px;
+      }
+    }
+  }
+  .prizeView {
+    width: 670px;
+    height: 300px;
+    background: rgba(255, 255, 255, 1);
+    border: 10px solid rgba(254, 211, 72, 1);
+    border-radius: 30px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+    .prizeItemView {
+      width: 590px;
+      height: 98px;
+      border-bottom: 1px dashed rgba(250, 143, 39, 1);
+      display: flex;
+      flex-direction: row;
+      .txt1 {
+        display: block;
+        width: 260px;
+        height: 98px;
+        font-size: 34px;
+        font-family: PingFangSC;
+        font-weight: 400;
+        color: rgba(204, 82, 0, 1);
+        line-height: 36px;
+        line-height: 98px;
+      }
+    }
+    .prizeItemView2 {
+      width: 590px;
+      height: 98px;
 
       display: flex;
       flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
       .txt1 {
         display: block;
-        line-height: 70px;
-        font-size: 30px;
-        font-family: Source Han Sans CN;
-        font-weight: bold;
+        width: 260px;
+        height: 98px;
+        font-size: 34px;
+        font-family: PingFangSC;
+        font-weight: 400;
         color: rgba(204, 82, 0, 1);
+        line-height: 36px;
+        line-height: 98px;
       }
-      .txt2 {
+    }
+  }
+  .ruleTitleView {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    width: 750px;
+    height: 90px;
+    margin-top: 70px;
+    .prizeRightIcon {
+      width: 29px;
+      height: 39px;
+
+      margin-left: 60px;
+      margin-bottom: 10px;
+    }
+    .ruleTxtView {
+      width: 355px;
+      height: 90px;
+      display: flex;
+      flex-direction: row;
+      margin-left: 200px;
+      .prizeIcon {
+        width: 355px;
+        height: 90px;
+      }
+      .txt1 {
         display: block;
-        font-size: 30px;
-        line-height: 70px;
+        width: 355px;
+        height: 90px;
+        font-size: 40px;
         font-family: Source Han Sans CN;
         font-weight: 500;
-        text-decoration: underline;
-        color: rgba(204, 82, 0, 1);
+        color: rgba(161, 61, 1, 1);
+        line-height: 90px;
+        position: absolute;
+        text-align: center;
+        letter-spacing: 8px;
       }
     }
-    .btnIcon {
-      position: absolute;
-      width: 470px;
-      height: 135px;
-      top: 705px;
-    }
+  }
+  .ruleView {
+    width: 620px;
+    min-height: 50px;
+    background: rgba(255, 255, 255, 1);
+    border: 10px solid rgba(254, 211, 72, 1);
+    border-radius: 30px;
+    margin: 40px auto;
+    font-size: 34px;
+    font-family: PingFangSC;
+    font-weight: 400;
+    color: rgba(204, 82, 0, 1);
+    white-space: pre-line; // h5
+    padding: 25px 25px;
+    line-height: 60px;
+  }
+  .blockView {
+    width: 750px;
+    height: 10px;
   }
 }
 
