@@ -1,6 +1,5 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View, Text, Image } from '@tarojs/components';
-import GridCardAction from '@/components/gridCardAction';
 import './gridCard.less';
 
 export default class GridCard extends Component {
@@ -171,7 +170,7 @@ export default class GridCard extends Component {
   openCard = e => {
     console.log('e1111-', e);
     console.log('ready---', this.state.ready);
-    const { item, index } = e;
+    const { item, index } = e.currentTarget.dataset;
     const { card } = this.state;
     // 动画没有结束，或已经点开
     if (!this.state.ready || item.status == 1) {
@@ -199,12 +198,35 @@ export default class GridCard extends Component {
     return (
       <View className="container">
         <View className="grid-card">
-          <GridCardAction
-            onRef={c => (this.GridCardAction = c)}
-            id="gridCardAction"
-            card={card}
-            onOpen={this.openCard}
-          ></GridCardAction>
+          <View className="card">
+            {card.map((item, index) => {
+              return (
+                <View key="index">
+                  <View
+                    data-index={index}
+                    data-item={item}
+                    onClick={this.openCard}
+                    className={
+                      'project item' +
+                      index +
+                      ' ' +
+                      (item.isMove ? 'ani' : '') +
+                      ' ' +
+                      (item.status == 1 ? 'flip' : '')
+                    }
+                  >
+                    <Image
+                      className="front"
+                      src="https://imgs.solui.cn/weapp/card.png"
+                    ></Image>
+                    <View className="back">
+                      <Image src={item.img}></Image>
+                    </View>
+                  </View>
+                </View>
+              );
+            })}
+          </View>
         </View>
         <View>
           <View className="button" onClick={this.start}>
