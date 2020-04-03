@@ -22,8 +22,8 @@ export default class Index extends Component {
           },
           {
             id: 'grid-card',
-            url: '/pages/gridCard/gridCard',
-            name: '九宫格翻牌动画',
+            url: '/pages/gridCard1/gridCard',
+            name: '翻翻看',
             show: true
           },
           {
