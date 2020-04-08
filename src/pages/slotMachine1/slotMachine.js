@@ -11,39 +11,149 @@ const iconPrizeBg = `${local_img_base}prizeBg@2x.png`;
 const iconSlotPrizeModal = `${local_img_base}slotPrizeModal@2x.png`;
 const iconSlotPrizeHistoryModal = `${local_img_base}slotPrizeHistoryModal@2x.png`;
 
+const prize = [
+  {
+    name: '一等奖',
+    content: 'iphone1',
+    id: 1,
+  },
+  {
+    name: '二等奖',
+    content: 'iphone11',
+    id: 2,
+  },
+  {
+    name: '三等奖',
+    content: 'iphone12',
+    id: 3,
+  },
+];
+const historyRecord = [
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+];
+const stripHeight = 390; // 总高度
+const alignmentOffset = 62; // 结果位置偏移量
+const reelSpeed1Delta = 100; // 间隔位移
+const positioningTime = 200; // 停止前动画时间 200
+const bounceHeight = 85; // 结束弹射动画高度
+const firstReelStopTime = 667; // 第一个动画延迟停止时间 667
+const secondReelStopTime = 575; // 第二个动画延迟停止时间 575
+const thirdReelStopTime = 568; // 第三个动画延迟停止时间 568
+const payoutStopTime = 1500; // 触发结束延迟时间
+const numIconsPerReel = 3; // 每个轮子几个格子
+
 export default class SlotMachine extends Component {
   state = {
     spinDisabled: false,
     result: [], // 中奖池
-    prize: [
-      {
-        name: '一等奖',
-        content: 'iphone1',
-        id: 1,
-      },
-      {
-        name: '二等奖',
-        content: 'iphone11',
-        id: 2,
-      },
-      {
-        name: '三等奖',
-        content: 'iphone12',
-        id: 3,
-      },
-    ],
-    credits: 50, //积分
-    curBet: 1, // 每局消耗积分
-    stripHeight: 390, // 总高度
-    alignmentOffset: 62, // 结果位置偏移量
-    reelSpeed1Delta: 100, // 间隔位移
-    positioningTime: 200, // 停止前动画时间 200
-    bounceHeight: 85, // 结束弹射动画高度
-    firstReelStopTime: 667, // 第一个动画延迟停止时间 667
-    secondReelStopTime: 575, // 第二个动画延迟停止时间 575
-    thirdReelStopTime: 568, // 第三个动画延迟停止时间 568
-    payoutStopTime: 1500, // 触发结束延迟时间
-    numIconsPerReel: 3, // 每个轮子几个格子
+
     timer: [],
     reels: [
       // 轮子动画属性
@@ -63,116 +173,7 @@ export default class SlotMachine extends Component {
         css: '',
       },
     ],
-    historyRecord: [
-      {
-        prizeName: '三等奖',
-        time: '2020-01-01 12:00:00',
-        isGet: true,
-        prizeDetailName: 'iphone10',
-      },
-      {
-        prizeName: '三等奖',
-        time: '2020-01-01 12:00:00',
-        isGet: true,
-        prizeDetailName: 'iphone10',
-      },
-      {
-        prizeName: '三等奖',
-        time: '2020-01-01 12:00:00',
-        isGet: true,
-        prizeDetailName: 'iphone10',
-      },
-      {
-        prizeName: '三等奖',
-        time: '2020-01-01 12:00:00',
-        isGet: true,
-        prizeDetailName: 'iphone10',
-      },
-      {
-        prizeName: '三等奖',
-        time: '2020-01-01 12:00:00',
-        isGet: true,
-        prizeDetailName: 'iphone10',
-      },
-      {
-        prizeName: '三等奖',
-        time: '2020-01-01 12:00:00',
-        isGet: true,
-        prizeDetailName: 'iphone10',
-      },
-      {
-        prizeName: '三等奖',
-        time: '2020-01-01 12:00:00',
-        isGet: true,
-        prizeDetailName: 'iphone10',
-      },
-      {
-        prizeName: '三等奖',
-        time: '2020-01-01 12:00:00',
-        isGet: true,
-        prizeDetailName: 'iphone10',
-      },
-      {
-        prizeName: '三等奖',
-        time: '2020-01-01 12:00:00',
-        isGet: true,
-        prizeDetailName: 'iphone10',
-      },
-      {
-        prizeName: '三等奖',
-        time: '2020-01-01 12:00:00',
-        isGet: true,
-        prizeDetailName: 'iphone10',
-      },
-      {
-        prizeName: '三等奖',
-        time: '2020-01-01 12:00:00',
-        isGet: true,
-        prizeDetailName: 'iphone10',
-      },
-      {
-        prizeName: '三等奖',
-        time: '2020-01-01 12:00:00',
-        isGet: true,
-        prizeDetailName: 'iphone10',
-      },
-      {
-        prizeName: '三等奖',
-        time: '2020-01-01 12:00:00',
-        isGet: true,
-        prizeDetailName: 'iphone10',
-      },
-      {
-        prizeName: '三等奖',
-        time: '2020-01-01 12:00:00',
-        isGet: true,
-        prizeDetailName: 'iphone10',
-      },
-      {
-        prizeName: '三等奖',
-        time: '2020-01-01 12:00:00',
-        isGet: true,
-        prizeDetailName: 'iphone10',
-      },
-      {
-        prizeName: '三等奖',
-        time: '2020-01-01 12:00:00',
-        isGet: true,
-        prizeDetailName: 'iphone10',
-      },
-      {
-        prizeName: '三等奖',
-        time: '2020-01-01 12:00:00',
-        isGet: true,
-        prizeDetailName: 'iphone10',
-      },
-      {
-        prizeName: '三等奖',
-        time: '2020-01-01 12:00:00',
-        isGet: true,
-        prizeDetailName: 'iphone10',
-      },
-    ],
+
     visibleModal: false,
     visibleHistoryModal: false,
     isGetPrize: false,
@@ -191,13 +192,7 @@ export default class SlotMachine extends Component {
   }
   // 开始
   start() {
-    const {
-      spinDisabled,
-      firstReelStopTime,
-      secondReelStopTime,
-      thirdReelStopTime,
-      payoutStopTime, // 触发结束延迟时间
-    } = this.state;
+    const { spinDisabled, timer } = this.state;
     // 点击开始后不可点击
     if (spinDisabled) return false;
     // 随机设置奖项 数据从后台接口获取
@@ -215,15 +210,22 @@ export default class SlotMachine extends Component {
     // 结束
     this.runAsync(firstReelStopTime)
       .then(() => {
+        clearInterval(timer[0]);
         this.stop_reel_spin(0, result[0]);
+        // 清除滚动timer
+
         return this.runAsync(secondReelStopTime);
       })
       .then(() => {
+        clearInterval(timer[1]);
         this.stop_reel_spin(1, result[1]);
+
         return this.runAsync(thirdReelStopTime);
       })
       .then(() => {
+        clearInterval(timer[2]);
         this.stop_reel_spin(2, result[2]);
+
         return this.runAsync(payoutStopTime);
       })
       .then(() => {
@@ -237,7 +239,7 @@ export default class SlotMachine extends Component {
   }
   // 开始动画
   start_reel_spin(index) {
-    const { stripHeight, reelSpeed1Delta, reels, timer } = this.state; //  stripHeight总高度，reelSpeed1Delta间隔位移
+    const { reels, timer } = this.state; //  stripHeight总高度，reelSpeed1Delta间隔位移
     const position = parseInt(-(Math.random() * stripHeight * 2));
 
     // console.log('开始动画---position---', position);
@@ -281,14 +283,7 @@ export default class SlotMachine extends Component {
   }
   // 停止动画
   stop_reel_spin(index, lottery) {
-    const {
-      stripHeight, // 总高度
-      numIconsPerReel, // 每个轮子有几个格子
-      alignmentOffset, // 结果位置偏移量
-      positioningTime, // 停止前动画时间
-      bounceHeight, // 结束弹射动画高度
-      reels,
-    } = this.state;
+    const { reels } = this.state;
     const cellHeight = stripHeight / numIconsPerReel;
     // console.log('--结束动画--cellHeight--', cellHeight);
     // console.log('--结束动画--lottery--', lottery);
@@ -297,8 +292,8 @@ export default class SlotMachine extends Component {
 
     console.log('--结束动画--position--', position);
 
-    // 清除滚动timer
-    clearInterval(this.state.timer[index]);
+    // // 清除滚动timer
+    // clearInterval(this.state.timer[index]);
     // 最终位置
     reels.map((item, reelsIndex) => {
       if (reelsIndex == index) {
@@ -374,7 +369,7 @@ export default class SlotMachine extends Component {
     });
   }
   render() {
-    const { prize, reels, isGetPrize, historyRecord } = this.state;
+    const { reels, isGetPrize } = this.state;
     const rule =
       '1.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n2.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n3.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n4.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n5.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n6.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n7.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。';
     // console.log('render时候的reels', reels);
