@@ -2,14 +2,19 @@ import { View, Text, Image } from '@tarojs/components';
 import Taro, { Component } from '@tarojs/taro';
 import './bigWheel.less';
 import classNames from 'classnames';
-import iconWheelBg from '../../static/wheelBg@3x.jpg';
-import iconWheelCircle from '../../static/wheelCircle@3x.png';
-import iconWheelModalFail from '../../static/wheelModalFail@3x.png';
-import iconWheelModalSuccess from '../../static/wheelModalSuccess@3x.png';
-import iconWheelRuleBg from '../../static/wheelRuleBg@3x.png';
-import iconWheelStart from '../../static/wheelStart@3x.png';
-import iconWheelTitle from '../../static/wheelTitle@3x.png';
-import iconWheelModalClose from '../../static/icon-close.png';
+
+const local_img_base =
+  'https://xinya-shop.oss-cn-hangzhou.aliyuncs.com/images/static/';
+
+const iconWheelBg = `${local_img_base}wheelBg@3x.jpg`;
+const iconWheelCircle = `${local_img_base}wheelCircle@3x.png`;
+const iconWheelModalFail = `${local_img_base}wheelModalFail@3x.png`;
+const iconWheelModalSuccess = `${local_img_base}wheelModalSuccess@3x.png`;
+const iconWheelRuleBg = `${local_img_base}wheelRuleBg@3x.png`;
+const iconWheelStart = `${local_img_base}wheelStart@3x.png`;
+const iconWheelTitle = `${local_img_base}wheelTitle@3x.png`;
+const iconWheelModalClose = `${local_img_base}icon-close.png`;
+
 class BigWheel extends Component {
   state = {
     rollState: false, // 是否正在抽奖
@@ -28,7 +33,7 @@ class BigWheel extends Component {
       '二等奖',
       '谢谢参与',
       '三等奖',
-      '谢谢参与'
+      '谢谢参与',
     ], //奖品数组
     title: '抽奖页面标题',
     lotteryArrLen: 8, //放奖品的数组的长度
@@ -37,92 +42,92 @@ class BigWheel extends Component {
         award: '华为xxxxxxxxxxxxxx',
         awardName: '一等奖',
         exchangeStatusName: '已领取',
-        winningTime: '2019-10-16'
+        winningTime: '2019-10-16',
       },
       {
         award: '华为xxxx',
         awardName: '一等奖',
         exchangeStatusName: '已领取',
-        winningTime: '2019-10-16'
+        winningTime: '2019-10-16',
       },
       {
         award: '华为xxxx',
         awardName: '一等奖',
         exchangeStatusName: '已领取',
-        winningTime: '2019-10-16'
+        winningTime: '2019-10-16',
       },
       {
         award: '华为xxxx',
         awardName: '一等奖',
         exchangeStatusName: '已领取',
-        winningTime: '2019-10-16'
+        winningTime: '2019-10-16',
       },
       {
         award: '华为xxxx',
         awardName: '一等奖',
         exchangeStatusName: '已领取',
-        winningTime: '2019-10-16'
+        winningTime: '2019-10-16',
       },
       {
         award: '华为xxxx',
         awardName: '一等奖',
         exchangeStatusName: '已领取',
-        winningTime: '2019-10-16'
+        winningTime: '2019-10-16',
       },
       {
         award: '华为xxxx',
         awardName: '一等奖',
         exchangeStatusName: '已领取',
-        winningTime: '2019-10-16'
+        winningTime: '2019-10-16',
       },
       {
         award: '华为xxxx',
         awardName: '一等奖',
         exchangeStatusName: '已领取',
-        winningTime: '2019-10-16'
+        winningTime: '2019-10-16',
       },
       {
         award: '华为xxxx',
         awardName: '一等奖',
         exchangeStatusName: '已领取',
-        winningTime: '2019-10-16'
+        winningTime: '2019-10-16',
       },
       {
         award: '华为xxxx',
         awardName: '一等奖',
         exchangeStatusName: '已领取',
-        winningTime: '2019-10-16'
+        winningTime: '2019-10-16',
       },
       {
         award: '华为xxxx',
         awardName: '一等奖',
         exchangeStatusName: '已领取',
-        winningTime: '2019-10-16'
+        winningTime: '2019-10-16',
       },
       {
         award: '华为xxxx',
         awardName: '一等奖',
         exchangeStatusName: '已领取',
-        winningTime: '2019-10-16'
-      }
-    ]
+        winningTime: '2019-10-16',
+      },
+    ],
   };
   config = {
     navigationBarTitleText: '大转盘',
     navigationBarBackgroundColor: '#ffffff',
-    navigationBarTextStyle: 'black'
+    navigationBarTextStyle: 'black',
   };
   componentWillMount() {
     // 掉接口看用户有几次抽奖机会，如果抽奖机会大于等于1就可以抽奖
 
     this.setState({
-      canRollNum: 3
+      canRollNum: 3,
     });
 
     let aniData = Taro.createAnimation({
       //创建动画对象
       duration: 3000,
-      timingFunction: 'ease'
+      timingFunction: 'ease',
     });
     this.aniData = aniData; //将动画对象赋值给this的aniData属性
   }
@@ -131,10 +136,10 @@ class BigWheel extends Component {
   };
   closeModal = () => {
     this.setState({
-      visibleModal: false
+      visibleModal: false,
     });
   };
-  showHistoryModal = flag => {
+  showHistoryModal = (flag) => {
     this.setState({ visibleHistoryModal: flag });
   };
   startRollTap = () => {
@@ -146,7 +151,7 @@ class BigWheel extends Component {
       rollState,
       visibleModal,
       num,
-      isWin
+      isWin,
     } = this.state;
     if (canRollNum < 1 || rollState || visibleModal) return;
 
@@ -164,17 +169,17 @@ class BigWheel extends Component {
     aniData.rotate(3600 * num - (360 / lotteryArrLen) * rightNum).step(); //设置转动的圈数
     this.setState({
       rollState: true,
-      aniData: aniData.export() //导出动画队列。export 方法每次调用后会清掉之前的动画操作。
+      aniData: aniData.export(), //导出动画队列。export 方法每次调用后会清掉之前的动画操作。
     });
 
     // 动画停止设置状态
-    setTimeout(_ => {
+    setTimeout((_) => {
       this.showModal(); // 当转盘停止显示模态框显示抽奖结果
       this.setState({
         visibleModal: true,
         canRollNum: canRollNum - 1, // 抽奖次数减一
         rollState: false, // 将转盘状态切换为可抽奖
-        num: num + 1
+        num: num + 1,
       });
     }, 3000);
   };
@@ -190,7 +195,7 @@ class BigWheel extends Component {
       isWin,
       visibleHistoryModal,
       historyData,
-      prizeName
+      prizeName,
     } = this.state;
     let winText = `您获得${prizeName}`;
     let failText = '很遗憾您没有中奖';
@@ -291,7 +296,7 @@ class BigWheel extends Component {
                   <View
                     className={classNames({
                       'modal-btn-get-short': prizeType == 0 || prizeType == 1,
-                      'modal-btn-get-long': prizeType == 2
+                      'modal-btn-get-long': prizeType == 2,
                     })}
                     onClick={this.closeModal}
                   >
