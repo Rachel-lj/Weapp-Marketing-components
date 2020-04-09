@@ -18,118 +18,109 @@ export default class GridCard extends Component {
         id: 1,
         prizeName: '1',
         img: iconCardFront,
-        status: 0 //   :0 反面 , 1 正面
+        status: 0, //   :0 反面 , 1 正面
       },
       {
         id: 2,
         prizeName: '2',
         img: iconCardFront,
-        status: 0
+        status: 0,
       },
       {
         id: 3,
         prizeName: '3',
         img: iconCardFront,
-        status: 0
+        status: 0,
       },
       {
         id: 4,
         prizeName: '4',
         img: iconCardFront,
-        status: 0
+        status: 0,
       },
       {
         id: 5,
         prizeName: '5',
         img: iconCardFront,
-        status: 0
+        status: 0,
       },
       {
         id: 6,
         prizeName: '6',
         img: iconCardFront,
-        status: 0
-      }
+        status: 0,
+      },
     ],
     prize: [
       {
         name: '一等奖',
         content: 'iphone1',
-        id: 1
+        id: 1,
       },
       {
         name: '二等奖',
         content: 'iphone11',
-        id: 2
+        id: 2,
       },
       {
         name: '三等奖',
         content: 'iphone12',
-        id: 3
+        id: 3,
       },
       {
         name: '四等奖',
         content: 'iphone12',
-        id: 4
+        id: 4,
       },
       {
         name: '五等奖',
         content: 'iphone12',
-        id: 5
-      }
+        id: 5,
+      },
     ],
-    ready: false // 是否点击开始抽奖
+    ready: false, // 是否点击开始抽奖
   };
   config = {
-    navigationBarTitleText: '翻翻看'
+    navigationBarTitleText: '翻翻看',
   };
   componentDidShow() {
-    this.start();
+    const { card } = this.state;
+
+    this.runAsync(10).then(() => {
+      // 洗牌动画
+      for (let i = 1; i < 7; i++) {
+        this.runAsync(i * 20)
+          .then(() => {
+            card[i - 1].isMove = true;
+            this.setState({
+              card,
+            });
+            console.log('card1111111', i);
+            return this.runAsync(i * 20 + 1000);
+          })
+          .then(() => {
+            card[i - 1].isMove = false;
+            this.setState({
+              card,
+            });
+            console.log('card2222222222', i);
+            return this.runAsync(1200);
+          });
+      }
+    });
   }
   // 延迟返回 promise 方法  time:延迟时间
-  runAsync = time => {
-    return new Promise(function(resolve, reject) {
-      const timer = setTimeout(function() {
+  runAsync = (time) => {
+    return new Promise(function (resolve, reject) {
+      const timer = setTimeout(function () {
         resolve();
         clearTimeout(timer);
       }, time);
     });
   };
 
-  start = callback => {
-    const { card } = this.state;
-
-    this.runAsync(100).then(() => {
-      // 洗牌动画
-      for (let i = 0; i < 6; i++) {
-        this.runAsync(i * 40)
-          .then(() => {
-            card[i].isMove = true;
-            this.setState({
-              card
-            });
-            return this.runAsync(i * 40 + 1200);
-          })
-          .then(() => {
-            card[i].isMove = false;
-            this.setState({
-              card
-            });
-
-            return this.runAsync(1600);
-          })
-          .then(() => {
-            // 结束后回调
-            if (typeof callback === 'function') {
-              callback();
-            }
-          });
-      }
-    });
-  };
-
   // 子组件触发，点击打开单个卡片奖品
-  openCard = e => {
+  openCard = (e) => {
     console.log('e1111-', e);
     console.log('ready---', this.state.ready);
     const { item, index } = e.currentTarget.dataset;
@@ -146,7 +137,7 @@ export default class GridCard extends Component {
       return cardItem;
     });
     this.setState({
-      card: card
+      card: card,
     });
     // Taro.showToast({
     //   title: `你点击了第${index + 1}个`,
