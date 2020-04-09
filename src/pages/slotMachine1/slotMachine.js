@@ -149,7 +149,7 @@ export default class SlotMachine extends Component {
     animationData2: {},
     visibleModal: false,
     visibleHistoryModal: false,
-    isGetPrize: false,
+    isGetPrize: true,
   };
   config = {
     navigationBarTitleText: '水果机',
@@ -206,7 +206,7 @@ export default class SlotMachine extends Component {
         animationData0: animation0.export(),
       });
       setTimeout(() => {
-        animation0.translateY(286).step();
+        animation0.translateY(286).step({ duration: 0 });
         this.setState({
           animationData0: animation0.export(),
         });
@@ -217,7 +217,7 @@ export default class SlotMachine extends Component {
         animationData0: animation0.export(),
       });
       setTimeout(() => {
-        animation0.translateY(0).step();
+        animation0.translateY(0).step({ duration: 0 });
         this.setState({
           animationData0: animation0.export(),
         });
@@ -228,7 +228,7 @@ export default class SlotMachine extends Component {
         animationData0: animation0.export(),
       });
       setTimeout(() => {
-        animation0.translateY(143).step();
+        animation0.translateY(143).step({ duration: 0 });
         this.setState({
           animationData0: animation0.export(),
         });
@@ -241,7 +241,7 @@ export default class SlotMachine extends Component {
         animationData1: animation1.export(),
       });
       setTimeout(() => {
-        animation1.translateY(286).step();
+        animation1.translateY(286).step({ duration: 0 });
         this.setState({
           animationData1: animation1.export(),
         });
@@ -252,7 +252,7 @@ export default class SlotMachine extends Component {
         animationData1: animation1.export(),
       });
       setTimeout(() => {
-        animation1.translateY(0).step();
+        animation1.translateY(0).step({ duration: 0 });
         this.setState({
           animationData1: animation1.export(),
         });
@@ -263,7 +263,7 @@ export default class SlotMachine extends Component {
         animationData1: animation1.export(),
       });
       setTimeout(() => {
-        animation1.translateY(143).step();
+        animation1.translateY(143).step({ duration: 0 });
         this.setState({
           animationData1: animation1.export(),
         });
@@ -276,7 +276,7 @@ export default class SlotMachine extends Component {
         animationData2: animation2.export(),
       });
       setTimeout(() => {
-        animation2.translateY(286).step();
+        animation2.translateY(286).step({ duration: 0 });
         this.setState({
           animationData2: animation2.export(),
         });
@@ -287,7 +287,7 @@ export default class SlotMachine extends Component {
         animationData2: animation2.export(),
       });
       setTimeout(() => {
-        animation2.translateY(0).step();
+        animation2.translateY(0).step({ duration: 0 });
         this.setState({
           animationData2: animation2.export(),
         });
@@ -298,7 +298,7 @@ export default class SlotMachine extends Component {
         animationData2: animation2.export(),
       });
       setTimeout(() => {
-        animation2.translateY(143).step();
+        animation2.translateY(143).step({ duration: 0 });
         this.setState({
           animationData2: animation2.export(),
         });
