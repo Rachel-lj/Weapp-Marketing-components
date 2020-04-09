@@ -1,5 +1,6 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View, Text, Image } from '@tarojs/components';
+import * as CommonFnc from '../../utils/commonFnc';
 import './SlotMachine.less';
 const local_img_base =
   'https://xinya-shop.oss-cn-hangzhou.aliyuncs.com/images/static/';
@@ -138,42 +139,14 @@ const historyRecord = [
     prizeDetailName: 'iphone10',
   },
 ];
-const stripHeight = 390; // 总高度
-const alignmentOffset = 62; // 结果位置偏移量
-const reelSpeed1Delta = 100; // 间隔位移
-const positioningTime = 200; // 停止前动画时间 200
-const bounceHeight = 85; // 结束弹射动画高度
-const firstReelStopTime = 667; // 第一个动画延迟停止时间 667
-const secondReelStopTime = 575; // 第二个动画延迟停止时间 575
-const thirdReelStopTime = 568; // 第三个动画延迟停止时间 568
-const payoutStopTime = 1500; // 触发结束延迟时间
-const numIconsPerReel = 3; // 每个轮子几个格子
 
 export default class SlotMachine extends Component {
   state = {
     spinDisabled: false,
     result: [], // 中奖池
-
-    timer: [],
-    reels: [
-      // 轮子动画属性
-      {
-        top: -72, // 初始位置
-        animation: '', // 结束滚动动画
-        css: '', // 反弹动画css
-      },
-      {
-        top: -202,
-        animation: '',
-        css: '',
-      },
-      {
-        top: -338,
-        animation: '',
-        css: '',
-      },
-    ],
-
+    animationData0: {},
+    animationData1: {},
+    animationData2: {},
     visibleModal: false,
     visibleHistoryModal: false,
     isGetPrize: false,
@@ -192,184 +165,172 @@ export default class SlotMachine extends Component {
   }
   // 开始
   start() {
-    const { spinDisabled, timer } = this.state;
+    const { spinDisabled, isGetPrize } = this.state;
     // 点击开始后不可点击
+
     if (spinDisabled) return false;
     // 随机设置奖项 数据从后台接口获取
-    let result = [];
-    for (var i = 0; i < 3; i++) {
-      result.push(Math.floor(Math.random() * 3 + 1));
-    }
+
+    const result = CommonFnc.randomPrize(isGetPrize);
+
     console.log('随机设置奖项后的result---', result);
     this.setState({ spinDisabled: true, result: result });
     // 触发组件开始方法
     // 开始滚动
-    this.start_reel_spin(0);
-    this.start_reel_spin(1);
-    this.start_reel_spin(2);
-    // 结束
-    this.runAsync(firstReelStopTime)
-      .then(() => {
-        clearInterval(timer[0]);
-        this.stop_reel_spin(0, result[0]);
-        // 清除滚动timer
-
-        return this.runAsync(secondReelStopTime);
-      })
-      .then(() => {
-        clearInterval(timer[1]);
-        this.stop_reel_spin(1, result[1]);
-
-        return this.runAsync(thirdReelStopTime);
-      })
-      .then(() => {
-        clearInterval(timer[2]);
-        this.stop_reel_spin(2, result[2]);
-
-        return this.runAsync(payoutStopTime);
-      })
-      .then(() => {
-        // 完成
-        // 重置
-        this.reset_reel_spin(0);
-        this.reset_reel_spin(1);
-        this.reset_reel_spin(2);
-        this.doFinish();
-      });
-  }
-  // 开始动画
-  start_reel_spin(index) {
-    const { reels, timer } = this.state; //  stripHeight总高度，reelSpeed1Delta间隔位移
-    const position = parseInt(-(Math.random() * stripHeight * 2));
-
-    // console.log('开始动画---position---', position);
-
-    reels.map((item, reelsIndex) => {
-      if (reelsIndex == index) {
-        item.top = position;
-      }
-      return item;
-    });
-    console.log('开始动画---reels---', reels);
-    this.setState({
-      reels: reels,
-    });
-    // 循环动画
-    timer[index] = setInterval(() => {
-      reels.map((item, reelsIndex) => {
-        if (reelsIndex == index) {
-          item.top = reels[index].top + reelSpeed1Delta;
-        }
-        return item;
-      });
-      // console.log('开始动画--循环动画--reels---', reels);
-      // console.log('开始动画--循环动画--timer---', timer);
-      this.setState({
-        reels: reels,
-      });
-      if (reels[index].top > 0) {
-        reels.map((item, reelsIndex) => {
-          if (reelsIndex == index) {
-            item.top = 2 * -stripHeight;
-          }
-          return item;
-        });
-        // console.log('开始动画--如果top大于0--reels---', reels);
-        this.setState({
-          reels: reels,
-        });
-      }
-    }, 20);
-  }
-  // 停止动画
-  stop_reel_spin(index, lottery) {
-    const { reels } = this.state;
-    const cellHeight = stripHeight / numIconsPerReel;
-    // console.log('--结束动画--cellHeight--', cellHeight);
-    // console.log('--结束动画--lottery--', lottery);
-    const position =
-      -stripHeight - (lottery - 1) * cellHeight + alignmentOffset;
-
-    console.log('--结束动画--position--', position);
-
-    // // 清除滚动timer
-    // clearInterval(this.state.timer[index]);
-    // 最终位置
-    reels.map((item, reelsIndex) => {
-      if (reelsIndex == index) {
-        item.top = position - stripHeight;
-      }
-      return item;
-    });
-    // console.log('--结束动画--reels--', reels);
-    this.setState({
-      reels: reels,
-    });
-
-    // 到最终位置之前的动画
-    var animation = Taro.createAnimation({
+    let animation0 = Taro.createAnimation({
       transformOrigin: '50% 50%',
-      duration: positioningTime,
+      duration: 500,
       timingFunction: 'linear',
       delay: 0,
     });
-    animation.translateY(bounceHeight).step();
-
-    reels.map((item, reelsIndex) => {
-      if (reelsIndex == index) {
-        item.animation = animation.export();
-      }
-      return item;
+    let animation1 = Taro.createAnimation({
+      transformOrigin: '50% 50%',
+      duration: 500,
+      timingFunction: 'linear',
+      delay: 0,
     });
-    this.setState({
-      reels: reels,
+    let animation2 = Taro.createAnimation({
+      transformOrigin: '50% 50%',
+      duration: 500,
+      timingFunction: 'linear',
+      delay: 0,
     });
+    this.animation0 = animation0;
+    this.animation1 = animation1;
+    this.animation2 = animation2;
 
-    // 弹射动画
-    this.runAsync(positioningTime).then(() => {
-      // translateY重置成0为下次做准备
-      animation.translateY(0).step({ duration: 0 });
-      reels.map((item, reelsIndex) => {
-        if (reelsIndex == index) {
-          item.animation = animation.export();
-          item.css = 'bounce';
-        }
-        return item;
-      });
+    // 间距143
+    if (result[0] == 1) {
+      animation0.translateY(1144).step();
       this.setState({
-        reels: reels,
+        animationData0: animation0.export(),
       });
+      setTimeout(() => {
+        animation0.translateY(286).step();
+        this.setState({
+          animationData0: animation0.export(),
+        });
+      }, 1000);
+    } else if (result[0] == 2) {
+      animation0.translateY(858).step();
+      this.setState({
+        animationData0: animation0.export(),
+      });
+      setTimeout(() => {
+        animation0.translateY(0).step();
+        this.setState({
+          animationData0: animation0.export(),
+        });
+      }, 1000);
+    } else if (result[0] == 3) {
+      animation0.translateY(1001).step();
+      this.setState({
+        animationData0: animation0.export(),
+      });
+      setTimeout(() => {
+        animation0.translateY(143).step();
+        this.setState({
+          animationData0: animation0.export(),
+        });
+      }, 1000);
+    }
+
+    if (result[1] == 1) {
+      animation1.translateY(1144).step();
+      this.setState({
+        animationData1: animation1.export(),
+      });
+      setTimeout(() => {
+        animation1.translateY(286).step();
+        this.setState({
+          animationData1: animation1.export(),
+        });
+      }, 1000);
+    } else if (result[1] == 2) {
+      animation1.translateY(858).step();
+      this.setState({
+        animationData1: animation1.export(),
+      });
+      setTimeout(() => {
+        animation1.translateY(0).step();
+        this.setState({
+          animationData1: animation1.export(),
+        });
+      }, 1000);
+    } else if (result[1] == 3) {
+      animation1.translateY(1001).step();
+      this.setState({
+        animationData1: animation1.export(),
+      });
+      setTimeout(() => {
+        animation1.translateY(143).step();
+        this.setState({
+          animationData1: animation1.export(),
+        });
+      }, 1000);
+    }
+
+    if (result[2] == 1) {
+      animation2.translateY(1144).step();
+      this.setState({
+        animationData2: animation2.export(),
+      });
+      setTimeout(() => {
+        animation2.translateY(286).step();
+        this.setState({
+          animationData2: animation2.export(),
+        });
+      }, 1000);
+    } else if (result[2] == 2) {
+      animation2.translateY(858).step();
+      this.setState({
+        animationData2: animation2.export(),
+      });
+      setTimeout(() => {
+        animation2.translateY(0).step();
+        this.setState({
+          animationData2: animation2.export(),
+        });
+      }, 1000);
+    } else if (result[2] == 3) {
+      animation2.translateY(1001).step();
+      this.setState({
+        animationData2: animation2.export(),
+      });
+      setTimeout(() => {
+        animation2.translateY(143).step();
+        this.setState({
+          animationData2: animation2.export(),
+        });
+      }, 1000);
+    }
+
+    // 结束
+    this.runAsync(900).then(() => {
+      // 完成
+      this.doFinish();
     });
   }
-  // 重置动画
-  reset_reel_spin(index) {
-    const { reels } = this.state;
-    reels.map((item, reelsIndex) => {
-      if (reelsIndex == index) {
-        item.css = '';
-      }
-      return item;
-    });
-    this.setState({
-      reels: reels,
-    });
-  }
+
   // 结束
   doFinish() {
     console.log('完成抽奖后的结果---', this.state.result);
-    let isGetPrize =
-      this.state.result[0] == this.state.result[1] &&
-      this.state.result[0] == this.state.result[2] &&
-      this.state.result[1] == this.state.result[2];
+    const { result } = this.state;
+    // let isGetPrize = result.every((res) => res == result[0]);
 
     this.setState({
       spinDisabled: false,
       visibleModal: true,
-      isGetPrize,
+      // isGetPrize,
     });
   }
   render() {
-    const { reels, isGetPrize } = this.state;
+    const {
+      isGetPrize,
+      animationData0,
+      animationData1,
+      animationData2,
+    } = this.state;
     const rule =
       '1.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n2.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n3.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n4.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n5.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n6.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n7.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。';
     // console.log('render时候的reels', reels);
@@ -381,16 +342,9 @@ export default class SlotMachine extends Component {
           {/* 水果机部分 */}
           <View className="slot-machine-container">
             <View className="reel-container">
-              {reels.map((item, index) => {
-                return (
-                  <View
-                    key="index"
-                    className={'reel reel' + index + ' ' + item.css}
-                    animation={item.animation}
-                    style={'top:' + item.top + 'rpx;'}
-                  ></View>
-                );
-              })}
+              <View className="reel reel0" animation={animationData0}></View>
+              <View className="reel reel1" animation={animationData1}></View>
+              <View className="reel reel2" animation={animationData2}></View>
             </View>
             <View className="drawNumView">
               <Text className="txt1">您共有X次摇奖机会</Text>
