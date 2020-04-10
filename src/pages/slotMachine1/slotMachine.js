@@ -28,6 +28,16 @@ const prize = [
     content: 'iphone12',
     id: 3,
   },
+  {
+    name: '四等奖',
+    content: 'iphone12',
+    id: 4,
+  },
+  {
+    name: '五等奖',
+    content: 'iphone12',
+    id: 5,
+  },
 ];
 const historyRecord = [
   {
@@ -383,7 +393,9 @@ export default class SlotMachine extends Component {
           {prize.map((item, index) => {
             return (
               <View
-                className={index == 2 ? 'prizeItemView2' : 'prizeItemView'}
+                className={
+                  index == prize.length - 1 ? 'prizeItemView2' : 'prizeItemView'
+                }
                 key={item.id}
               >
                 <Text className="txt1">{item.name}</Text>

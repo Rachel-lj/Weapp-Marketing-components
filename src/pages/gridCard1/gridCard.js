@@ -10,7 +10,135 @@ const iconGridCardBgHead = `${local_img_base}gridCardBgHead@2x.png`;
 const iconPrizeHistory = `${local_img_base}prizeHistory@2x.png`;
 const iconRedPacket = `${local_img_base}redPacket@2x.png`;
 const iconCardTitle = `${local_img_base}cardTitle.png`;
-
+const iconGridPrizeModal = `${local_img_base}gridPrizeModal@2x.png`;
+const iconGridPrizeHistoryModal = `${local_img_base}gridPrizeHistoryModal@2x.png`;
+const prize = [
+  {
+    name: '一等奖',
+    content: 'iphone1',
+    id: 1,
+  },
+  {
+    name: '二等奖',
+    content: 'iphone11',
+    id: 2,
+  },
+  {
+    name: '三等奖',
+    content: 'iphone12',
+    id: 3,
+  },
+];
+const historyRecord = [
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+];
 export default class GridCard extends Component {
   state = {
     card: [
@@ -51,33 +179,9 @@ export default class GridCard extends Component {
         status: 0,
       },
     ],
-    prize: [
-      {
-        name: '一等奖',
-        content: 'iphone1',
-        id: 1,
-      },
-      {
-        name: '二等奖',
-        content: 'iphone11',
-        id: 2,
-      },
-      {
-        name: '三等奖',
-        content: 'iphone12',
-        id: 3,
-      },
-      {
-        name: '四等奖',
-        content: 'iphone12',
-        id: 4,
-      },
-      {
-        name: '五等奖',
-        content: 'iphone12',
-        id: 5,
-      },
-    ],
+    visibleModal: false,
+    visibleHistoryModal: false,
+    isGetPrize: true,
     ready: false, // 是否点击开始抽奖
   };
   config = {
@@ -139,6 +243,9 @@ export default class GridCard extends Component {
     this.setState({
       card: card,
     });
+    setTimeout(() => {
+      this.setState({ visibleModal: true });
+    }, 800);
     // Taro.showToast({
     //   title: `你点击了第${index + 1}个`,
     //   icon: 'none'
@@ -146,7 +253,7 @@ export default class GridCard extends Component {
     console.log('this.state', this.state);
   };
   render() {
-    const { card, prize } = this.state;
+    const { card, isGetPrize } = this.state;
     const rule =
       '1.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n2.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n3.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n4.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n5.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n6.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n7.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。';
     let Rule = rule.replace(/\\n/g, '\n');
@@ -157,7 +264,11 @@ export default class GridCard extends Component {
             src={iconGridCardBgHead}
             className="iconGridCardBgHead"
           ></Image>
-          <Image src={iconPrizeHistory} className="iconPrizeHistory"></Image>
+          <Image
+            src={iconPrizeHistory}
+            className="iconPrizeHistory"
+            onClick={() => this.setState({ visibleHistoryModal: true })}
+          ></Image>
         </View>
         {/* 卡片部分 */}
         <View className="cardBorderView">
@@ -229,7 +340,93 @@ export default class GridCard extends Component {
             className="iconGridCardBgBottom"
           ></Image>
         </View>
-        {/* 底部图片 */}
+        {/* 中奖弹窗 */}
+        {visibleModal && (
+          <View className="gridCard-modal">
+                        <View className="gridCard-modal-mask"></View>
+                        
+            <View className="gridCard-modal-content">
+                          
+              <Image
+                className="gridCard-modal-img"
+                src={iconGridPrizeModal}
+              ></Image>
+              <Text className="txt1">
+                {isGetPrize ? '恭喜你中奖了！' : '很遗憾没有中奖哦'}
+              </Text>
+              {isGetPrize && <Text className="prizeName">iphone</Text>}
+              {!isGetPrize && (
+                <View>
+                  <Text className="noPrizeName">
+                    太可惜了竟然与奖品擦肩而过
+                  </Text>
+                  <Text className="noPrizeName1">换个姿势吧</Text>
+                </View>
+              )}
+              {isGetPrize && (
+                <View className="btnGroup">
+                  <View
+                    className="giveUpPrizeBtn"
+                    onClick={() => this.setState({ visibleModal: false })}
+                  >
+                    放弃奖品
+                  </View>
+                  <View
+                    className="getPrizeBtn"
+                    onClick={() => this.setState({ visibleModal: false })}
+                  >
+                    立即领取
+                  </View>
+                </View>
+              )}
+              {!isGetPrize && (
+                <View
+                  className="noPrizeBtn"
+                  onClick={() => this.setState({ visibleModal: false })}
+                >
+                  好的
+                </View>
+              )}
+            </View>
+                    
+          </View>
+        )}
+        {/* 中奖历史弹窗 */}
+        {visibleHistoryModal && (
+          <View className="gridCard-history-modal">
+            <View className="gridCard-history-modal-mask"></View>
+            <View className="gridCard-history-modal-content">
+              <Image
+                className="iconSlotPrizeHistoryModal"
+                src={iconGridPrizeHistoryModal}
+              ></Image>
+              <View className="gridCard-history-modal-table">
+                {historyRecord.map((item, index) => {
+                  return (
+                    <View className="gridCard-history-modal-item">
+                      <View className="firstView">
+                        <Text className="txt1">{item.prizeName}</Text>
+                        <Text className="txt1">{item.prizeDetailName}</Text>
+                      </View>
+                      <View className="secondView">
+                        <Text className="txt1">{item.time}</Text>
+                        <Text className="txt2">
+                          {item.isGet ? '已领取' : '未领取'}
+                        </Text>
+                      </View>
+                    </View>
+                  );
+                })}
+              </View>
+              <View
+                className="okBtn"
+                onClick={() => this.setState({ visibleHistoryModal: false })}
+              >
+                知道了
+              </View>
+            </View>
+          </View>
+        )}
       </View>
     );
   }
