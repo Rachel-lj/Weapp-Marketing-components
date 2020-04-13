@@ -17,7 +17,7 @@ class App extends Component {
       'pages/gridCard1/gridCard',
       'pages/packetRain/packetRain',
       'pages/slotMachine1/slotMachine',
-      'pages/goldenEgg1/goldenEgg',
+      'pages/goldenEgg/goldenEgg',
       'pages/scratchCard/scratchCard',
       'pages/shake/shake',
     ],

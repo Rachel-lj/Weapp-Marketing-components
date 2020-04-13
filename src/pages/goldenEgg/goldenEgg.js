@@ -1,180 +1,350 @@
-import Taro from '@tarojs/taro';
+import Taro, { Component } from '@tarojs/taro';
 import { View, Text, Image } from '@tarojs/components';
-
 import './goldenEgg.less';
-import * as CommonFnc from '../../utils/commonFnc';
-import headerImg from '../../static/egg-header.png';
-import bgImg from '../../static/egg-bg.png';
-import egg0Img from '../../static/egg0.png';
-import egg1Img from '../../static/egg1.png';
-import egg2Img from '../../static/egg2.png';
-import egg3Img from '../../static/egg3.png';
-import egg4Img from '../../static/egg4.png';
+const local_img_base =
+  'https://xinya-shop.oss-cn-hangzhou.aliyuncs.com/images/static/';
+const iconGoldenEggBg1 = `${local_img_base}goldenEggBg1@2x.png`;
+const iconGoldenTitle = `${local_img_base}goldenTitle@2x.png`;
+const iconTitlePoint = `${local_img_base}titlePoint@2x.png`;
+const iconSlotPrizeModal = `${local_img_base}slotPrizeModal@2x.png`;
+const iconSlotPrizeHistoryModal = `${local_img_base}slotPrizeHistoryModal@2x.png`;
+const iconEgg0 = `${local_img_base}egg0@2x.png`;
+const iconEgg1 = `${local_img_base}egg1@2x.png`;
+const iconEgg2 = `${local_img_base}egg2@2x.png`;
+const iconEgg3 = `${local_img_base}egg3@2x.png`;
+const iconEgg4 = `${local_img_base}egg4@2x.png`;
 
-class Egg extends Taro.Component {
+const prize = [
+  {
+    name: '一等奖',
+    content: 'iphone1',
+    id: 1,
+  },
+  {
+    name: '二等奖',
+    content: 'iphone11',
+    id: 2,
+  },
+  {
+    name: '三等奖',
+    content: 'iphone12',
+    id: 3,
+  },
+  {
+    name: '四等奖',
+    content: 'iphone12',
+    id: 4,
+  },
+  {
+    name: '五等奖',
+    content: 'iphone12',
+    id: 5,
+  },
+];
+const historyRecord = [
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+  {
+    prizeName: '三等奖',
+    time: '2020-01-01 12:00:00',
+    isGet: true,
+    prizeDetailName: 'iphone10',
+  },
+];
+
+export default class GoldenEgg extends Component {
+  state = {
+    spinDisabled: false,
+    targetEgg: iconEgg0,
+    visibleModal: false,
+    visibleHistoryModal: false,
+    isGetPrize: true,
+    eggAction: false,
+  };
   config = {
-    navigationBarTitleText: '砸金蛋'
+    navigationBarTitleText: '砸金蛋',
   };
-  constructor() {
-    super(...arguments);
-    //屏幕的尺寸
-    const screenSize = CommonFnc.getScreenSize();
-    this.state = {
-      screenSizeStyle: `width:${screenSize.width}px;height:${screenSize.height}px`,
-      isRun: false,
-      eggImg: [
-        egg0Img,
-        egg0Img,
-        egg0Img,
-        egg0Img,
-        egg0Img,
-        egg0Img,
-        egg0Img,
-        egg0Img
-      ],
-      opt: {
-        prizeItemList: [
-          { name: '未中奖' },
-          { name: '奖品1' },
-          { name: '奖品2' },
-          { name: '奖品3' },
-          { name: '奖品4' },
-          { name: '奖品5' },
-          { name: '奖品6' }
-        ],
-        animationCount: 3, //动画次数
-        eggCount: 6, //奖励个数
-        preResult: false, //上次是否中奖
-        programIndex: 0 //砸蛋逻辑
-      },
-      prize: null
-    };
-  }
-  componentWillMount() {}
-
   componentDidMount() {}
-
-  componentWillUnmount() {}
-
-  componentDidShow() {}
-
-  componentDidHide() {}
-
-  //砸开金蛋点击事件
-  openEgg = index => {
-    console.log('砸的第几个蛋');
-    console.log(index);
-    let opt = this.state.opt;
-    //等待上一次砸蛋结束
-    if (this.state.isRun) return;
-    this.setState({
-      isRun: true
+  // runAsync 延迟返回 promise 方法
+  runAsync(time) {
+    return new Promise(function (resolve, reject) {
+      const timer = setTimeout(function () {
+        resolve();
+        clearTimeout(timer);
+      }, time);
     });
-    let timer = null;
-    let num = 0;
-    let prizeIndex; //奖品编号
-    let count = opt.animationCount; //动画次数
-
-    //砸蛋动画
-    timer = setInterval(() => {
-      if (num < 4) {
-        let _eggImg = this.state.eggImg;
-        switch (num) {
-          case 0:
-            _eggImg[index] = egg0Img;
-            this.setState({
-              eggImg: _eggImg
-            });
-            break;
-          case 1:
-            _eggImg[index] = egg1Img;
-            this.setState({
-              eggImg: _eggImg
-            });
-            break;
-          case 2:
-            _eggImg[index] = egg2Img;
-            this.setState({
-              eggImg: _eggImg
-            });
-            break;
-          case 3:
-            _eggImg[index] = egg3Img;
-            this.setState({
-              eggImg: _eggImg
-            });
-            break;
-        }
-      } else {
-        num = 0;
-        count--;
-      }
-
-      if (count == 0) {
-        //业务逻辑处理
-        clearInterval(timer); //停止动画
-        let _eggImg = this.state.eggImg;
-        _eggImg[index] = egg4Img;
-        this.setState({
-          eggImg: _eggImg
-        });
-        prizeIndex = Math.floor(Math.random() * opt.eggCount);
-        console.log(opt.prizeItemList[prizeIndex]);
-        this.setState({
-          prize: opt.prizeItemList[prizeIndex].name
-        });
-      }
-      num++;
-    }, 200);
-    //一次砸蛋结束,将flag置为false
-    this.setState({
-      isRun: false
+  }
+  start() {
+    this.setState({ eggAction: true });
+    this.runAsync(1600).then(() => {
+      this.setState({ visibleModal: true });
     });
-  };
-
+  }
   render() {
-    const { screenSizeStyle, eggImg, prize } = this.state;
-    /*头部图片*/
-    const header = (
-      <View className="header">
-        <Image className="wd100" mode="widthFix" src={headerImg} />
-      </View>
-    );
-    /*金蛋的背景图片*/
-    const egg_bg = (
-      <View className="eggBg">
-        <Image className="wd100 ht100" src={bgImg} />
-      </View>
-    );
-    const numbers = [...Array(8).keys()];
-    /*金蛋选项*/
-    const egg = (
-      <View className="egg">
-        <View className="at-row at-row--wrap">
-          {numbers.map(index => (
-            <View className="at-col-3" key={index}>
-              <View className="pd20" onClick={this.openEgg.bind(this, index)}>
-                <Image className="wd100" mode="widthFix" src={eggImg[index]} />
+    const { isGetPrize, eggAction } = this.state;
+    const rule =
+      '1.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n2.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n3.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n4.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n5.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n6.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。\n7.这里是抽奖规则说明，内容全部展示，内容文案通过后台编辑配置。';
+    // console.log('render时候的reels', reels);
+    let Rule = rule.replace(/\\n/g, '\n');
+    return (
+      <View className="container">
+        {/* 预加载图片 */}
+        <Image src={iconEgg0} className="noneImg"></Image>
+        <Image src={iconEgg1} className="noneImg"></Image>
+        <Image src={iconEgg2} className="noneImg"></Image>
+        <Image src={iconEgg3} className="noneImg"></Image>
+        <Image src={iconEgg4} className="noneImg"></Image>
+        <View className="topView">
+          <Image src={iconGoldenEggBg1} className="iconGoldenEggBg1"></Image>
+          <View
+            className="historyView"
+            onClick={() => this.setState({ visibleHistoryModal: true })}
+          >
+            中奖历史
+          </View>
+          <Image src={iconGoldenTitle} className="iconGoldenTitle"></Image>
+          <View className="prizeNumTxt">您共有X次抽奖机会</View>
+          {!eggAction && (
+            <Image
+              src={targetEgg}
+              className="iconEggStatic"
+              onClick={this.start}
+            ></Image>
+          )}
+          {eggAction && <View className="iconEgg" onClick={this.start}></View>}
+        </View>
+
+        <View className="iconGoldenEggBg">
+          {/* 奖品展示 */}
+          <View className="prizeView">
+            <View className="prizeTitleView">
+              <Image src={iconTitlePoint} className="iconTitlePoint"></Image>
+              <Text className="txt">奖品展示</Text>
+            </View>
+            <View className="prizeTableView">
+              <View className="tr">
+                <View className="th th1">奖项</View>
+                <View className="th th2">奖品</View>
+              </View>
+              {prize.map((item) => {
+                return (
+                  <View className="tr">
+                    <View className="td td1">{item.name}</View>
+                    <View className="td td2">{item.content}</View>
+                  </View>
+                );
+              })}
+            </View>
+            <View className="tipTxt">
+              注：积分兑换可以获取更多抽奖机会，每个季度的最后一个月（3月、6月、9月、12月）
+              的28号清空当季获取的抽奖机会
+            </View>
+          </View>
+          {/* 抽奖规则 */}
+          <View className="ruleView">
+            <View className="ruleTitleView">
+              <Image src={iconTitlePoint} className="iconTitlePoint"></Image>
+              <Text className="txt">抽奖规则</Text>
+            </View>
+
+            <View className="ruleTxt">{Rule}</View>
+          </View>
+          <View className="block"></View>
+        </View>
+        {/* 中奖弹窗 */}
+        {visibleModal && (
+          <View className="goldenEgg-modal">
+                        <View className="goldenEgg-modal-mask"></View>
+                        
+            <View className="goldenEgg-modal-content">
+                          
+              <Image
+                className="goldenEgg-modal-img"
+                src={iconSlotPrizeModal}
+              ></Image>
+              <Text className="txt1">
+                {isGetPrize ? '恭喜你中奖了！' : '很遗憾没有中奖哦'}
+              </Text>
+              {isGetPrize && <Text className="prizeName">iphone</Text>}
+              {!isGetPrize && (
+                <View>
+                  <Text className="noPrizeName">
+                    太可惜了竟然与奖品擦肩而过
+                  </Text>
+                  <Text className="noPrizeName1">换个姿势吧</Text>
+                </View>
+              )}
+              {isGetPrize && (
+                <View className="btnGroup">
+                  <View
+                    className="giveUpPrizeBtn"
+                    onClick={() =>
+                      this.setState({ visibleModal: false, eggAction: false })
+                    }
+                  >
+                    放弃奖品
+                  </View>
+                  <View
+                    className="getPrizeBtn"
+                    onClick={() =>
+                      this.setState({ visibleModal: false, eggAction: false })
+                    }
+                  >
+                    立即领取
+                  </View>
+                </View>
+              )}
+              {!isGetPrize && (
+                <View
+                  className="noPrizeBtn"
+                  onClick={() =>
+                    this.setState({ visibleModal: false, eggAction: false })
+                  }
+                >
+                  好的
+                </View>
+              )}
+            </View>
+                    
+          </View>
+        )}
+        {/* 中奖历史弹窗 */}
+        {visibleHistoryModal && (
+          <View className="goldenEgg-history-modal">
+            <View className="goldenEgg-history-modal-mask"></View>
+            <View className="goldenEgg-history-modal-content">
+              <Image
+                className="iconSlotPrizeHistoryModal"
+                src={iconSlotPrizeHistoryModal}
+              ></Image>
+              <View className="goldenEgg-history-modal-table">
+                {historyRecord.map((item, index) => {
+                  return (
+                    <View className="goldenEgg-history-modal-item">
+                      <View className="firstView">
+                        <Text className="txt1">{item.prizeName}</Text>
+                        <Text className="txt1">{item.prizeDetailName}</Text>
+                      </View>
+                      <View className="secondView">
+                        <Text className="txt1">{item.time}</Text>
+                        <Text className="txt2">
+                          {item.isGet ? '已领取' : '未领取'}
+                        </Text>
+                      </View>
+                    </View>
+                  );
+                })}
+              </View>
+              <View
+                className="okBtn"
+                onClick={() => this.setState({ visibleHistoryModal: false })}
+              >
+                知道了
               </View>
             </View>
-          ))}
-        </View>
-      </View>
-    );
-    /*中奖信息*/
-    const prizeContent = (
-      <View className="prizeContent text-center mt20">
-        <Text>恭喜您！获得了{prize}</Text>
-      </View>
-    );
-    return (
-      <View className="index " style={screenSizeStyle}>
-        {/*金蛋选项*/}
-        {egg}
-        {/*中奖信息*/}
-        {prize !== null ? prizeContent : ''}
+          </View>
+        )}
       </View>
     );
   }
 }
-export default Egg;

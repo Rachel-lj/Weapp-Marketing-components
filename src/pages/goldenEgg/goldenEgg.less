@@ -1,26 +1,524 @@
-page {
-  overflow: hidden;
+@keyframes run {
+  0%,
+  20% {
+    background-position: 0 0;
+  }
+  20%,
+  40% {
+    background-position: -140px 0;
+    background: url(https://xinya-shop.oss-cn-hangzhou.aliyuncs.com/images/static/egg1@2x.png);
+    background-size: 750px 620px;
+  }
+  40%,
+  60% {
+    background-position: -280px 0;
+    background: url(https://xinya-shop.oss-cn-hangzhou.aliyuncs.com/images/static/egg2@2x.png);
+    background-size: 750px 620px;
+  }
+  60%,
+  80% {
+    background-position: -420px 0;
+    background: url(https://xinya-shop.oss-cn-hangzhou.aliyuncs.com/images/static/egg3@2x.png);
+    background-size: 750px 620px;
+  }
+  80%,
+  100% {
+    background-position: -560px 0;
+    background: url(https://xinya-shop.oss-cn-hangzhou.aliyuncs.com/images/static/egg4@2x.png);
+    background-size: 750px 620px;
+  }
 }
-.index {
-  overflow: hidden;
+@-webkit-keyframes run {
+  0%,
+  20% {
+    background-position: 0 0;
+  }
+  20%,
+  40% {
+    background-position: -140px 0;
+    background: url(https://xinya-shop.oss-cn-hangzhou.aliyuncs.com/images/static/egg1@2x.png);
+    background-size: 750px 620px;
+  }
+  40%,
+  60% {
+    background-position: -280px 0;
+    background: url(https://xinya-shop.oss-cn-hangzhou.aliyuncs.com/images/static/egg2@2x.png);
+    background-size: 750px 620px;
+  }
+  60%,
+  80% {
+    background-position: -420px 0;
+    background: url(https://xinya-shop.oss-cn-hangzhou.aliyuncs.com/images/static/egg3@2x.png);
+    background-size: 750px 620px;
+  }
+  80%,
+  100% {
+    background-position: -560px 0;
+    background: url(https://xinya-shop.oss-cn-hangzhou.aliyuncs.com/images/static/egg4@2x.png);
+    background-size: 750px 620px;
+  }
 }
-.header {
-  z-index: 2;
-}
-.eggBg {
-  position: absolute;
-  top: 439px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-}
-.egg {
-  position: relative;
-  z-index: 2;
-}
-.prizeContent {
-  position: relative;
-  color: darkred;
-  z-index: 2;
+.container {
+  min-height: 100vh;
+  .noneImg {
+    display: none;
+  }
+  .topView {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 750px;
+    height: 900px;
+    .iconGoldenEggBg1 {
+      width: 750px;
+      height: 900px;
+      position: absolute;
+    }
+    .historyView {
+      width: 125px;
+      height: 60px;
+      font-size: 26px;
+      font-family: PingFang SC;
+      font-weight: bold;
+      color: rgba(255, 255, 255, 1);
+      text-align: center;
+      line-height: 60px;
+      background: rgba(252, 192, 80, 1);
+      border-radius: 28px 0px 0px 28px;
+      position: absolute;
+      top: 37px;
+      right: 0;
+    }
+    .iconGoldenTitle {
+      width: 600px;
+      height: 185px;
+      position: absolute;
+      top: 60px;
+    }
+    .prizeNumTxt {
+      width: 400px;
+      height: 60px;
+      background: rgba(225, 57, 52, 1);
+      border-radius: 28px;
+      text-align: center;
+      line-height: 60px;
+      font-size: 32px;
+      font-family: PingFang SC;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 1);
+      top: 245px;
+      position: absolute;
+      letter-spacing: 4px;
+    }
+    .iconEgg {
+      width: 750px;
+      height: 620px;
+      position: absolute;
+      top: 285px;
+      background: url(https://xinya-shop.oss-cn-hangzhou.aliyuncs.com/images/static/egg0@2x.png);
+      background-size: 750px 620px;
+      animation: run 1.5s;
+      -webkit-animation: run 1.5s;
+      animation-fill-mode: forwards;
+      -webkit-animation-fill-mode: forwards;
+    }
+    .iconEggStatic {
+      width: 750px;
+      height: 620px;
+      position: absolute;
+      top: 285px;
+    }
+  }
+  .iconGoldenEggBg {
+    background: url(https://xinya-shop.oss-cn-hangzhou.aliyuncs.com/images/static/goldenEggBg@2x.png);
+    width: 750px;
+    background-size: 100% 100%;
+    // height: 2500px; // 记得删掉
+    position: absolute;
+    top: 898px;
+
+    // 奖品展示
+    .prizeView {
+      width: 660px;
+      // height: 700px; // 记得删掉
+      background: rgba(255, 255, 255, 1);
+      border-radius: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      margin-left: 45px;
+      margin-top: 20px;
+
+      .prizeTitleView {
+        width: 660px;
+        height: 110px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .iconTitlePoint {
+          width: 378px;
+          height: 40px;
+        }
+        .txt {
+          display: block;
+          letter-spacing: 10px;
+          font-size: 38px;
+          font-family: PingFang SC;
+          font-weight: bold;
+          color: rgba(236, 75, 70, 1);
+          position: absolute;
+        }
+      }
+      .prizeTableView {
+        border: 1px solid #dee2e6;
+        border-right: 0;
+        border-bottom: 0;
+        width: 575px;
+        margin-left: 1%;
+        margin-bottom: 20px;
+        .tr {
+          width: 575px;
+          display: flex;
+          justify-content: space-between;
+        }
+        .th,
+        .td {
+          height: 89px;
+          line-height: 89px;
+          border-bottom: 1px solid #dee2e6;
+          border-right: 1px solid #dee2e6;
+          text-align: center;
+          width: 100%;
+        }
+        .th {
+          background: rgba(255, 233, 232, 1);
+          font-size: 30px;
+          font-family: PingFang SC;
+          font-weight: bold;
+          color: rgba(0, 0, 0, 1);
+        }
+
+        .td {
+          font-size: 24px;
+          font-family: PingFang SC;
+          font-weight: 500;
+          color: rgba(51, 51, 51, 1);
+        }
+      }
+      .tipTxt {
+        margin-top: 20px;
+        margin-bottom: 40px;
+        width: 575px;
+        font-size: 24px;
+        font-family: PingFang SC;
+        font-weight: bold;
+        color: rgba(239, 75, 69, 1);
+      }
+    }
+
+    // 抽奖规则
+    .ruleView {
+      width: 660px;
+      // height: 700px; // 记得删掉
+      background: rgba(255, 255, 255, 1);
+      border-radius: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      // position: absolute;
+      margin-left: 45px;
+      margin-top: 30px;
+
+      .ruleTitleView {
+        width: 660px;
+        height: 110px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .iconTitlePoint {
+          width: 378px;
+          height: 40px;
+        }
+        .txt {
+          display: block;
+          letter-spacing: 10px;
+          font-size: 38px;
+          font-family: PingFang SC;
+          font-weight: bold;
+          color: rgba(236, 75, 70, 1);
+          position: absolute;
+        }
+      }
+
+      .ruleTxt {
+        width: 570px;
+        min-height: 50px;
+        font-size: 32px;
+        font-family: PingFang SC;
+        font-weight: 500;
+        color: rgba(51, 51, 51, 1);
+        white-space: pre-line; // h5
+        padding: 0px 25px 25px 25px;
+        line-height: 60px;
+      }
+    }
+    .block {
+      width: 750px;
+      height: 40px;
+    }
+  }
+  // 中奖提示弹窗
+  .goldenEgg-modal {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    touch-action: none;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    .goldenEgg-modal-mask {
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      touch-action: none;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    .goldenEgg-modal-content {
+      width: 750px;
+      height: 450px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+      .goldenEgg-modal-img {
+        width: 580px;
+        height: 690px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+      }
+      .txt1 {
+        width: 750px;
+        text-align: center;
+        display: block;
+        position: absolute;
+        top: -48px;
+        font-size: 40px;
+        font-family: PingFang;
+        font-weight: bold;
+        color: rgba(255, 50, 51, 1);
+        line-height: 80px;
+      }
+      .prizeName {
+        width: 414px;
+        text-align: center;
+        display: block;
+        position: absolute;
+        top: 60px;
+        font-size: 70px;
+        font-family: Source Han Sans CN;
+        font-weight: 800;
+        color: rgba(255, 50, 51, 1);
+        line-height: 74px;
+        left: 170px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .noPrizeName {
+        width: 750px;
+        text-align: center;
+        display: block;
+        position: absolute;
+        top: 40px;
+        font-size: 30px;
+        font-family: Source Han Sans CN;
+        font-weight: 800;
+        color: rgba(255, 50, 51, 1);
+        line-height: 74px;
+      }
+      .noPrizeName1 {
+        width: 750px;
+        text-align: center;
+        display: block;
+        position: absolute;
+        top: 90px;
+        font-size: 30px;
+        font-family: Source Han Sans CN;
+        font-weight: 800;
+        color: rgba(255, 50, 51, 1);
+        line-height: 74px;
+      }
+      .btnGroup {
+        position: absolute;
+        top: 255px;
+        font-size: 32px;
+        font-family: PingFang;
+        font-weight: 500;
+        color: rgba(213, 59, 27, 1);
+        line-height: 90px;
+        text-align: center;
+        margin-left: 160px;
+        .giveUpPrizeBtn {
+          width: 430px;
+          height: 90px;
+          background: rgba(255, 255, 255, 1);
+          box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.2);
+          border-radius: 45px;
+        }
+        .getPrizeBtn {
+          width: 430px;
+          height: 90px;
+          background: linear-gradient(
+            0deg,
+            rgba(255, 189, 5, 1) 0%,
+            rgba(255, 241, 93, 1) 100%
+          );
+          box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.2);
+          border-radius: 45px;
+          margin-top: 30px;
+        }
+      }
+      .noPrizeBtn {
+        position: absolute;
+        top: 305px;
+        width: 430px;
+        height: 90px;
+        background: rgba(255, 255, 255, 1);
+        box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.2);
+        border-radius: 45px;
+        font-size: 32px;
+        font-family: PingFang;
+        font-weight: 500;
+        color: rgba(213, 59, 27, 1);
+        line-height: 90px;
+        text-align: center;
+        margin-left: 160px;
+      }
+    }
+  }
+  // 中奖历史弹窗
+  .goldenEgg-history-modal {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: -180px;
+    touch-action: none;
+    left: 0;
+    z-index: 999;
+    .goldenEgg-history-modal-mask {
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      touch-action: none;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    .goldenEgg-history-modal-content {
+      width: 750px;
+      height: 900px;
+      position: absolute;
+
+      border-radius: 20px;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+      .iconSlotPrizeHistoryModal {
+        width: 660px;
+        height: 1000px;
+        position: absolute;
+        margin-left: 75px;
+      }
+      .goldenEgg-history-modal-table {
+        width: 520px;
+        height: 560px;
+        overflow: auto;
+        position: absolute;
+        top: 320px;
+        left: 122px;
+        .goldenEgg-history-modal-item {
+          width: 520px;
+          height: 100px;
+          margin-top: 10px;
+          .firstView {
+            width: 520px;
+            height: 45px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            .txt1 {
+              display: block;
+              text-align: center;
+              line-height: 45px;
+              font-size: 28px;
+              font-family: PingFang SC;
+              font-weight: bold;
+              color: rgba(51, 51, 51, 1);
+            }
+          }
+          .secondView {
+            width: 520px;
+            height: 45px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            .txt1 {
+              display: block;
+              text-align: center;
+              line-height: 45px;
+              font-size: 24px;
+              font-family: PingFang SC;
+              font-weight: bold;
+              color: rgba(153, 153, 153, 1);
+            }
+            .txt2 {
+              display: block;
+              text-align: center;
+              line-height: 45px;
+              font-size: 28px;
+              font-family: PingFang SC;
+              font-weight: bold;
+              color: rgba(102, 102, 102, 1);
+            }
+          }
+        }
+      }
+      .okBtn {
+        width: 430px;
+        height: 90px;
+        background: linear-gradient(
+          0deg,
+          rgba(255, 189, 5, 1) 0%,
+          rgba(255, 241, 93, 1) 100%
+        );
+        box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.2);
+        border-radius: 45px;
+        position: absolute;
+        top: 1040px;
+        left: 160px;
+        font-size: 32px;
+        font-family: Adobe Heiti Std;
+        font-weight: normal;
+        color: rgba(213, 59, 27, 1);
+        text-align: center;
+        line-height: 90px;
+      }
+    }
+  }
 }
