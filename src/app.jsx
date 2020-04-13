@@ -17,16 +17,16 @@ class App extends Component {
       'pages/gridCard1/gridCard',
       'pages/packetRain/packetRain',
       'pages/slotMachine1/slotMachine',
-      'pages/goldenEgg/goldenEgg',
+      'pages/goldenEgg1/goldenEgg',
       'pages/scratchCard/scratchCard',
-      'pages/shake/shake'
+      'pages/shake/shake',
     ],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black'
-    }
+      navigationBarTextStyle: 'black',
+    },
   };
 
   componentDidMount() {}

@@ -12,50 +12,50 @@ export default class Index extends Component {
             id: 'big-wheel',
             url: '/pages/bigWheel/bigWheel',
             name: '大转盘动画',
-            show: true
+            show: true,
           },
           {
             id: 'packet-rain',
             url: '/pages/packetRain/packetRain',
             name: '红包雨动画',
-            show: true
+            show: true,
           },
           {
             id: 'grid-card',
             url: '/pages/gridCard1/gridCard',
             name: '翻翻看',
-            show: true
+            show: true,
           },
           {
             id: 'slot-machine',
             url: '/pages/slotMachine1/slotMachine',
             name: '老虎机动画',
-            show: true
+            show: true,
           },
           {
             id: 'golden-egg',
-            url: '/pages/goldenEgg/goldenEgg',
+            url: '/pages/goldenEgg1/goldenEgg',
             name: '砸金蛋',
-            show: true
+            show: true,
           },
           {
             id: 'scratch-card',
             url: '/pages/scratchCard/scratchCard',
             name: '刮刮卡',
-            show: true
+            show: true,
           },
           {
             id: 'shake',
             url: '/pages/shake/shake',
             name: '摇一摇',
-            show: true
-          }
-        ]
-      }
-    ]
+            show: true,
+          },
+        ],
+      },
+    ],
   };
   config = {
-    navigationBarTitleText: '首页'
+    navigationBarTitleText: '首页',
   };
 
   render() {
