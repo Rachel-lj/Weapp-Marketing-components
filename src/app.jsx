@@ -18,7 +18,7 @@ class App extends Component {
       'pages/packetRain/packetRain',
       'pages/slotMachine1/slotMachine',
       'pages/goldenEgg/goldenEgg',
-      'pages/scratchCard/scratchCard',
+      'pages/scratchers/scratchers',
       'pages/shake/shake',
     ],
     window: {

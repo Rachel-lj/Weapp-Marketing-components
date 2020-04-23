@@ -1,0 +1,385 @@
+.shake_page {
+  font-family: PingFang SC;
+  background-color: #ffefde;
+  .bg_shake {
+    // text-align: center;
+    width: 100vw;
+    height: 79vh;
+    background-size: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    .history_icon_wrap {
+      position: absolute;
+      right: 60px;
+      top: 30px;
+      padding: 10px;
+    }
+    .history_icon {
+      height: 60px;
+      width: 60px;
+    }
+    .note_shake {
+      width: 522px;
+      height: 213px;
+      margin-top: 50px;
+    }
+    .note_text {
+      width: 300px;
+      height: 48px;
+      line-height: 48px;
+      background: rgba(225, 57, 52, 0.4);
+      border-radius: 24px;
+      font-size: 24px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 1);
+      text-align: center;
+    }
+    .hand_shake {
+      width: 410px;
+      height: 500px;
+      margin-left: 90px;
+    }
+
+    .shake_animation {
+      transform-origin: bottom;
+      animation: shake 0.7s linear 0s infinite;
+    }
+
+    @keyframes shake {
+      from {
+        transform: rotate(0deg);
+      }
+      25% {
+        transform: rotate(-20deg);
+      }
+      75% {
+        transform: rotate(20deg);
+      }
+      to {
+        transform-origin: (0%, 0%);
+      }
+    }
+  }
+  .middle_bg {
+    width: 100vw;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    position: relative;
+    top: -252px;
+    // background-color: rgba(255, 239, 222, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    .note_bg_shake {
+      width: 250px;
+      height: 77px;
+      background-size: 100%;
+      margin-top: 300px;
+      font-size: 42px;
+      font-family: Source Han Sans CN;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 1);
+      z-index: 99;
+      background-color: rgba(255, 239, 222, 1);
+
+      .note {
+        letter-spacing: 17px;
+        margin-left: 16px;
+      }
+    }
+    .rule {
+      margin-top: 25px;
+    }
+    .border {
+      width: 634px;
+      box-sizing: border-box;
+      padding: 15px 15px 20px 15px;
+      border-radius: 30px;
+      border: 16px solid rgba(255, 165, 34, 1);
+      position: relative;
+      top: -13px;
+      .prizeItem {
+        width: 572px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        .cell {
+          height: 90px;
+          line-height: 90px;
+          width: 50%;
+          text-align: center;
+          font-size: 30px;
+          font-family: PingFang SC;
+          font-weight: bold;
+          color: rgba(255, 136, 0, 1);
+        }
+        .cell_1 {
+          color: rgba(51, 51, 51, 1);
+        }
+        .outline {
+          outline: 1px solid rgba(255, 165, 34, 1);
+        }
+      }
+      .color_1 {
+        background: rgba(255, 213, 123, 1);
+      }
+      .rule_text {
+        font-size: 29px;
+        font-family: Source Han Sans CN;
+        font-weight: 400;
+        color: rgba(0, 0, 0, 1);
+      }
+    }
+  }
+  // 中奖提示弹窗
+  .gridCard-modal {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    touch-action: none;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    .gridCard-modal-mask {
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      touch-action: none;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    .gridCard-modal-content {
+      width: 750px;
+      height: 450px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+      .gridCard-modal-img {
+        width: 580px;
+        height: 690px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+      }
+      .txt1 {
+        width: 750px;
+        text-align: center;
+        display: block;
+        position: absolute;
+        top: -48px;
+        font-size: 40px;
+        font-family: PingFang;
+        font-weight: bold;
+        color: rgba(255, 50, 51, 1);
+        line-height: 80px;
+      }
+      .prizeName {
+        width: 414px;
+        text-align: center;
+        display: block;
+        position: absolute;
+        top: 60px;
+        font-size: 70px;
+        font-family: Source Han Sans CN;
+        font-weight: 800;
+        color: rgba(255, 50, 51, 1);
+        line-height: 74px;
+        left: 170px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .noPrizeName {
+        width: 750px;
+        text-align: center;
+        display: block;
+        position: absolute;
+        top: 40px;
+        font-size: 30px;
+        font-family: Source Han Sans CN;
+        font-weight: 800;
+        color: rgba(255, 50, 51, 1);
+        line-height: 74px;
+      }
+      .noPrizeName1 {
+        width: 750px;
+        text-align: center;
+        display: block;
+        position: absolute;
+        top: 90px;
+        font-size: 30px;
+        font-family: Source Han Sans CN;
+        font-weight: 800;
+        color: rgba(255, 50, 51, 1);
+        line-height: 74px;
+      }
+      .btnGroup {
+        position: absolute;
+        top: 255px;
+        font-size: 32px;
+        font-family: PingFang;
+        font-weight: 500;
+        color: rgba(213, 59, 27, 1);
+        line-height: 90px;
+        text-align: center;
+        margin-left: 160px;
+        .giveUpPrizeBtn {
+          width: 430px;
+          height: 90px;
+          background: rgba(255, 255, 255, 1);
+          box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.2);
+          border-radius: 45px;
+        }
+        .getPrizeBtn {
+          width: 430px;
+          height: 90px;
+          background: linear-gradient(0deg, rgba(255, 189, 5, 1) 0%, rgba(255, 241, 93, 1) 100%);
+          box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.2);
+          border-radius: 45px;
+          margin-top: 30px;
+        }
+      }
+      .noPrizeBtn {
+        position: absolute;
+        top: 305px;
+        width: 430px;
+        height: 90px;
+        background: rgba(255, 255, 255, 1);
+        box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.2);
+        border-radius: 45px;
+        font-size: 32px;
+        font-family: PingFang;
+        font-weight: 500;
+        color: rgba(213, 59, 27, 1);
+        line-height: 90px;
+        text-align: center;
+        margin-left: 160px;
+      }
+    }
+  }
+  // 中奖历史弹窗
+  .gridCard-history-modal {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: -180px;
+    touch-action: none;
+    left: 0;
+    z-index: 999;
+    .gridCard-history-modal-mask {
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      touch-action: none;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    .gridCard-history-modal-content {
+      width: 750px;
+      height: 900px;
+      position: absolute;
+
+      border-radius: 20px;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+      .iconSlotPrizeHistoryModal {
+        width: 660px;
+        height: 1000px;
+        position: absolute;
+        margin-left: 75px;
+      }
+      .gridCard-history-modal-table {
+        width: 520px;
+        height: 560px;
+        overflow: auto;
+        position: absolute;
+        top: 320px;
+        left: 122px;
+        .gridCard-history-modal-item {
+          width: 520px;
+          height: 100px;
+          margin-top: 10px;
+          .firstView {
+            width: 520px;
+            height: 45px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            .txt1 {
+              display: block;
+              text-align: center;
+              line-height: 45px;
+              font-size: 28px;
+              font-family: PingFang SC;
+              font-weight: bold;
+              color: rgba(51, 51, 51, 1);
+            }
+          }
+          .secondView {
+            width: 520px;
+            height: 45px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            .txt1 {
+              display: block;
+              text-align: center;
+              line-height: 45px;
+              font-size: 24px;
+              font-family: PingFang SC;
+              font-weight: bold;
+              color: rgba(153, 153, 153, 1);
+            }
+            .txt2 {
+              display: block;
+              text-align: center;
+              line-height: 45px;
+              font-size: 28px;
+              font-family: PingFang SC;
+              font-weight: bold;
+              color: rgba(102, 102, 102, 1);
+            }
+          }
+        }
+      }
+      .okBtn {
+        width: 430px;
+        height: 90px;
+        background: linear-gradient(0deg, rgba(255, 189, 5, 1) 0%, rgba(255, 241, 93, 1) 100%);
+        box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.2);
+        border-radius: 45px;
+        position: absolute;
+        top: 1040px;
+        left: 160px;
+        font-size: 32px;
+        font-family: Adobe Heiti Std;
+        font-weight: normal;
+        color: rgba(213, 59, 27, 1);
+        text-align: center;
+        line-height: 90px;
+      }
+    }
+  }
+}
